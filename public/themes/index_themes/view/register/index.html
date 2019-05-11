@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>注册</title>
+    <link href="__INDEX__/static/css/style_log.css" rel="stylesheet" type="text/css">
+    <style>
+        body.login{ background:url(__INDEX__/static/images/login_bgx.gif);}
+        .login_boder{ background: url(__INDEX__/static/images/login_m_bg.png) no-repeat;background-size:500px 600px; height:402px; overflow:hidden;}
+        .rem_sub input.sub_button{ float:right; width:122px; height:32px; background:url(__INDEX__/static/images/site_bg.png) no-repeat -153px -850px; border:none; color:#FFF; padding-bottom:2px; font-size:14px; font-weight:bold;}
+    </style>
+
+</head>
+
+<body class="login" mycollectionplug="bind">
+<div class="login_m">
+    <div class="login_logo"><img src="__INDEX__/static/images/vae_logo3.png" width="200" style="margin-bottom: -20px;"></div>
+    <div class="login_boder">
+
+        <div class="login_padding" id="login_model">
+            <form action="/index/register/checkEmail" method="post" onsubmit="return check();" name="form2">
+            <h2>用户名</h2>
+            <label>
+                <input type="text" id="username" name="username" class="txt_input txt_input2" onfocus="if (value ==&#39;Your name&#39;){value =&#39;&#39;}" onblur="if (value ==&#39;&#39;){value=&#39;Your name&#39;}" value="">
+            </label>
+            <h2>密码</h2>
+            <label>
+                <input type="password" name="password" id="userpwd1" class="txt_input" onfocus="if (value ==&#39;******&#39;){value =&#39;&#39;}" onblur="if (value ==&#39;&#39;){value=&#39;******&#39;}" value="">
+            </label>
+            <h2>确认密码</h2>
+            <label>
+                <input type="password" name="password2" id="userpwd2" class="txt_input" onfocus="if (value ==&#39;******&#39;){value =&#39;&#39;}" onblur="if (value ==&#39;&#39;){value=&#39;******&#39;}" value="">
+            </label>
+            <div class="rem_sub">
+                <a id="iforget" href="/index/login/index" style="margin-top: 10px;">返回登陆</a>
+                <label>
+                    <input type="submit" class="sub_button" name="button" id="button" value="点击验证邮箱" style="opacity: 0.7;margin-top: 30px;">
+                </label>
+            </div>
+        </div>
+        </form>
+
+        <script>
+            function check()
+            {
+                var username = document.getElementById('username').value;
+                if (username == '') {
+                    alert('请输入用户名');
+                    document.form2.username.focus();
+                    return false;
+                }
+
+                var password = document.getElementById('userpwd1').value;
+                if (password == '') {
+                    alert('请输入密码');
+                    document.form2.password.focus();
+                    return false;
+                }
+
+                var password2 = document.getElementById('userpwd2').value;
+                if (password2 == '') {
+                    alert('请输入确认密码');
+                    document.form2.password2.focus();
+                    return false;
+                }
+                if (password != password2) {
+                    alert('密码与确认密码不一致');
+                    document.form2.password2.focus();
+                    return false;
+                }
+            }
+        </script>
+
+        <div id="forget_model" class="login_padding" style="display:none">
+            <br>
+
+            <h1>Forgot password</h1>
+            <br>
+            <div class="forget_model_h2">(Please enter your registered email below and the system will automatically reset users’ password and send it to user’s registered email address.)</div>
+            <label>
+                <input type="text" id="usrmail" class="txt_input txt_input2">
+            </label>
+
+
+            <div class="rem_sub">
+                <div class="rem_sub_l">
+                </div>
+                <label>
+                    <input type="submit" class="sub_buttons" name="button" id="Retrievenow" value="Retrieve now" style="opacity: 0.7;">
+                    　　　
+                    <input type="submit" class="sub_button" name="button" id="denglou" value="Return" style="opacity: 0.7;">　　
+
+                </label>
+            </div>
+        </div>
+
+        <!--login_padding  Sign up end-->
+    </div><!--login_boder end-->
+</div><!--login_m end-->
+<br> <br>
+
+
+</body></html>

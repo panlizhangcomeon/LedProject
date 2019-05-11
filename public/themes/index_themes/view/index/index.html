@@ -1,0 +1,173 @@
+﻿{layout name="layout1" /}
+
+	  <div class="met-banner banner-pc700 banner-max400 banner-mobile200">
+		  {foreach $slide_info as $value}
+		  <a data-original="{$value.img}" data-originals="{$value.img}" title="轮播图" href="" target='_self'></a>
+		  {/foreach}
+	  </div>
+
+<div class="picture-box">
+  <div class="container-fluid">
+	<div class="title-box" data-plugin="appear" data-animate="slide-bottom" data-repeat="false">
+
+	  <h3>产品展示</h3>
+
+	  <p>围绕用户，我们用发现的视觉寻找无限可能，为您设计简而美的创新产品。</p>
+
+	</div>
+	<div class="picture-list">
+      <ul class="blocks blocks-xs-2 blocks-md-4">
+
+		  {foreach $product_display as $value}
+
+		<li data-plugin="appear" data-animate="slide-bottom" data-repeat="false">
+		  <a title="{$value.name}" href="/index/product_display/show?id={$value.id}&flag=科研中心">
+		    <p>
+			  <b></b>
+			  <i class="fa fa-search-plus"></i>
+		      <img data-original="{$value.img}" title="{$value.name}" alt="{$value.name}">
+			</p>
+			<span>{$value.name}</span>
+
+		  </a>
+		</li>
+		  {/foreach}
+	  </ul>
+	</div>
+  </div>
+</div>
+
+<div class="info-box">
+  <div class="container">
+	<div class="title-box" data-plugin="appear" data-animate="slide-bottom" data-repeat="false">
+
+	  <h3>行业新闻</h3>
+
+	  <p>我们提供行内最新新闻，让您在家中也能第一时间获取最新咨询。</p>
+
+	</div>
+    <div class="info-list">
+      <ul class="blocks blocks-xs-2 blocks-md-3 blocks-xlg-3">
+		{foreach $industry_news as $value}
+        <li data-plugin="appear" data-animate="slide-bottom" data-repeat="false">
+          <span>
+			<font>{$value.publish_date}</font>
+            <a href="/index/industry_news/show?id={$value.id}&flag=新闻动态" title="{$value.title}"><strong>{$value.title}</strong></a>
+			<div style="font-size: 12px;height: 60px;text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;line-clamp: 2;-webkit-box-orient: vertical;">
+			{$value.content}
+			</div>
+            <font>来源：{$value.source}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编辑：{$value.editor}</font>
+		  </span>
+        </li>
+		  {/foreach}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="contact-box">
+  <div class="container">
+	<div class="title-box black" data-plugin="appear" data-animate="slide-bottom" data-repeat="false">
+
+	</div>
+	<div class="row">
+	  <div class="col-lg-1"></div>
+	  <div class="col-lg-6 col-md-7 col-sm-7 contact-left" data-plugin="appear" data-animate="slide-bottom" data-repeat="false">
+		<div class="contact-text">
+		  <p><strong class="company"></strong></p>
+			  {foreach $nav_info as $key => $value}
+			<ul style="float: left;">
+			  {$key}
+			  {foreach $value as $d}
+			  <li style="margin-top: 10px;"><a href="{$d.src}?{$d.param}" class=""  title="{$d.title}">{$d.title}</a></li>
+			  {/foreach}
+			</ul>
+			  {/foreach}
+			<p><span style="font-weight: 700; font-size: 16px;"><br/></span></p>
+			<p>
+				<span style="font-size: 16px;">
+					<strong><br/></strong>
+				</span>
+			</p>
+		</div>
+	  </div>
+	  <div class="col-lg-1 col-md-1"></div>
+	  <div class="col-lg-4 col-md-5 col-sm-6 message-cut" data-plugin="appear" data-animate="slide-bottom" data-repeat="false">
+
+        <script language='javascript'>
+			function metmessagesubmit1() {
+				var name = document.myform.name.value.replace(/(^\s*)|(\s*$)/g, '');
+				if (name == 0) {
+					alert('姓名 不能为空');
+					document.myform.name.focus();
+					return false;
+				}
+				var phone = document.myform.tel.value.replace(/(^\s*)|(\s*$)/g, '');
+				var tel = document.myform.tel.value;
+				var reg = /^[1][34578][0-9]{9}$/;
+				if (phone == 0) {
+					alert('手机号 不能为空');
+					document.tel.phone.focus();
+					return false;
+				}
+				if (!reg.test(tel)) {
+					alert('手机号 格式不对');
+					document.tel.phone.focus();
+					return false;
+				}
+				var email = document.myform.email.value.replace(/(^\s*)|(\s*$)/g, '');
+				var email1 = document.myform.email.value;
+				var reg1 = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/;
+				if (email == 0) {
+					alert('Email 不能为空');
+					document.myform.email.focus();
+					return false;
+				}
+				if (!reg1.test(email1)) {
+					alert('邮箱 格式不对');
+					document.myform.email.focus();
+					return false;
+				}
+				var content = document.myform.leave_message.value.replace(/(^\s*)|(\s*$)/g, '');
+				if (content == 0) {
+					alert('留言内容 不能为空');
+					document.myform.leave_message.focus();
+					return false;
+				}
+				var captcha = document.myform.captcha.value.replace(/(^\s*)|(\s*$)/g, '');
+				if (captcha == 0) {
+					alert('验证码 不能为空');
+					document.myform.captcha.focus();
+					return false;
+				}
+			}
+			function verification() {
+				document.getElementById('new_code').click();
+			}
+</script>
+
+<form enctype='multipart/form-data' method='POST' name='myform' onSubmit='return metmessagesubmit1();' action='/index/leave_message/add' target='_self'>
+<div class='input'>
+	<input name='name' placeholder='姓名' type='text' size='30' class='input-text' />
+</div>
+<div class='input'>
+	<input name='tel' placeholder='手机号' type='text' size='30' class='input-text' id="tel"/>
+</div>
+<div class='input'>
+	<input name='email' placeholder='Email' type='text' size='30' class='input-text' />
+</div>
+<div class='input'>
+	<textarea name='leave_message' placeholder='留言内容' class='textarea-text' cols='50' rows='5'></textarea>
+</div>
+<div class='input'>
+	<input name='captcha' placeholder='验证码' onKeyUp='pressCaptcha(this)' type='text' class='code' id='code' size='6' maxlength='8' style='width:50px' onclick="verification()">
+	<img src="/captcha" class="input" height="37" width="120" id="captcha" onclick="this.src='/captcha?seed='+Math.random()">
+</div>
+<div class='submint'>
+<input type='submit' value='提交信息' class='submit button orange'></div>
+</form>
+
+	  </div>
+	</div>
+  </div>
+</div>

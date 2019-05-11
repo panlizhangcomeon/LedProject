@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>vaeThink</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="__ADMIN__/lib/layui/css/layui.css"  media="all">
+</head>
+<body class="vae-body">
+
+<div class="vae-content">
+    <table class="layui-hide" id="test" lay-filter="test"></table>
+</div>
+
+<script type="text/html" id="thumb">
+    <img src='{{d.thumb}}' height="25"/>
+</script>
+<script type="text/html" id="status">
+    <i class="layui-icon {{#  if(d.status == 1){ }}layui-icon-ok{{#  } else { }}layui-icon-close{{#  } }}"></i>
+</script>
+<script type="text/html" id="toolbarDemo">
+
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs layui-btn-primary" href="/admin/association/edit/id/{{d.id}}">编辑</a>
+</script>
+
+
+<script src="__ADMIN__/lib/layui/layui.js" charset="utf-8"></script>
+
+<script>
+    layui.config({
+        base: '/themes/admin_themes/module/'
+    }).use(['table','vaeyo','form'], function(){
+        var table = layui.table;
+
+        table.render({
+            elem: '#test',
+            toolbar: '#toolbarDemo',
+            url: '/admin/association/getContentList', //数据接口
+            page: true, //开启分页
+            limit: 15,
+            cols: [[ //表头
+                {field: 'id', title: 'ID', sort: true, fixed: 'left', align:'center', width:80},
+                {field: 'title', title: '标题', align:'center'},
+                {field: 'content', title: '内容', align:'center'},
+                {field: 'updated_at', title: '更新时间', align:'center'},
+                {field: 'right', toolbar: '#barDemo', width:150, align:'center'}
+            ]]
+        });
+    });
+</script>
+
+</body>
+</html>

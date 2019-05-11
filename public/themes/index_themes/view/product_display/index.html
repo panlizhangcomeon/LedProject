@@ -1,0 +1,61 @@
+{layout name="layout1" /}
+<div class="met-banner banner-pc300 banner-max300 banner-mobile200">
+
+    <a data-original="__INDEX__/static/images/science.jpg" data-originals="__INDEX__/static/images/science.jpg" title=""  target='_blank'></a>
+
+</div>
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <hr class="col-md-6">
+</div>
+
+<div class="row" align="center">
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+        <ol class="breadcrumb">
+            <li><a href="/index/index/index">首页</a></li>
+            <li><a href="#">{$cate}</a></li>
+            <li class="active">{$name}</li>
+        </ol>
+    </div>
+</div>
+
+<div class="met-product animsition type-1">
+    <div class="container">
+        <div class="row">
+            <div class="less-page-content">
+
+                <ul class="blocks blocks-100 blocks-xlg-4 blocks-md-4 blocks-sm-2 met-page-ajax met-grid" id="met-grid">
+                    {foreach $product_display as $value}
+                    <li class="masonry-item ">
+                        <div class="widget widget-shadow">
+                            <figure class="widget-header cover">
+                                <a href="/index/product_display/show?id={$value.id}&flag={$flag}" title="产品展示" target='_blank'>
+                                    <img class="cover-image" src="{$value.img}" alt="产品展示">
+                                </a>
+                            </figure>
+                            <h4 class="widget-title">
+                                <a href="528-cn.html" title="{$value.name}" target='_blank'>{$value.name}</a>
+
+                            </h4>
+                        </div>
+                    </li>
+                    {/foreach}
+                </ul>
+
+
+
+                <div class="hidden-xs">
+                    <div class='met_pager'>
+                        {$product_display->render()}
+                    </div>
+                </div>
+                <div class="met-page-ajax-body visible-xs-block">
+                    <button type="button" class="btn btn-default btn-block btn-squared ladda-button" id="met-page-btn" data-style="slide-left" data-url="http://www.lulian.cn/product/?lang=cn&class1=3&class2=7&class3=116&mbpagelist=1" data-page="1"><i class="icon wb-chevron-down margin-right-5" aria-hidden="true"></i>更多产品</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

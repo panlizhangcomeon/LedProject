@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>LED照明驱动与应用工程研究中心</title>
+    <meta name="renderer" content="webkit">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="generator" content="MetInfo 5.3.19"  data-variable="http://www.lulian.cn/,cn,10001,,10001,M1156005XiuGai0502" />
+    <meta name="description" content="LED照明驱动与应用工程研究中心" />
+    <meta name="keywords" content="LED照明驱动与应用工程研究中心" />
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link href="http://www.lulian.cn/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="__INDEX__/static/css/0685096a66cadb9e.css">
+    <style>*{font-family:'微软雅黑';}</style>
+    <!--[if lt IE 10]>
+    <script src="__INDEX__/static/js/media.match.min.js"></script>
+    <script src="__INDEX__/static/js/respond.min.js"></script>
+    <script src="__INDEX__/static/js/classlist.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    </script>
+    <![endif]-->
+    <style>
+        @media all and (max-width: 1200px) {
+            .state-indicator {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="met-navfixed">
+<!--[if lte IE 8]>
+<div class="text-center padding-top-50 padding-bottom-50 bg-blue-grey-100">
+    <p class="browserupgrade font-size-18">你正在使用一个<strong>过时</strong>的浏览器。请<a href="http://browsehappy.com/" target="_blank">升级您的浏览器</a>，以提高您的体验。</p>
+</div>
+<![endif]-->
+<nav class="navbar navbar-default met-nav navbar-fixed-top" role="navigation">
+    <?php if (empty($_GET['flag'])): ?>
+    <div style="float: left;margin-left: 10px;margin-top: 5px;font-family: STKaiti;border: 2px darkgray dashed;padding: 2px 10px;">
+        {$weather.city}，今天是{$weather.date}<br />风向为{$weather.fengxiang}<br />天气{$weather.type}<br />当前温度{$weather.wendu}度
+    </div>
+    <?php endif; ?>
+
+
+
+    <!--统计pv和ip-->
+    <script>
+        window.onload = function () {
+            $.get('/index/index/saveIp', function (res) {
+                var data = JSON.parse(res);
+                if (!data.code) {
+                    alert(data.msg);
+                    location.reload(true);
+                }
+            });
+        }
+    </script>
+
+    <!--统计uv-->
+    <?php if(!\think\Cookie::has('time')): ?>
+    <script>
+        window.onload = function () {
+            $.get('/index/index/saveIp', function (res) {
+                var data = JSON.parse(res);
+                if (!data.code) {
+                    alert(data.msg);
+                    location.reload(true);
+                }
+            });
+            $.get('/index/index/saveUv', function (res) {
+                var data = JSON.parse(res);
+                if (!data.code) {
+                    alert(data.msg);
+                }
+            });
+        }
+    </script>
+    <?php endif; ?>
+
+    <div class="container-fluid" >
+        <div class="row">
+            <!--登陆信息-->
+            <div style="float: right;" class="state-indicator">
+                <?php if (!\think\Session::has('username')){ ?>
+                [<a href="/index/leave_message/index?flag=message"><font color="red">查看留言</font></a>]
+                &nbsp;&nbsp;
+                您未登陆，请先
+                [<a href="/index/login/index?flag=login"><font color="red">登陆</font></a>]
+                &nbsp;&nbsp;
+                [<a href="/index/register/index?flag=register"><font color="red">注册</font></a>]
+                &nbsp;&nbsp;
+                <?php } else { ?>
+                欢迎您 ，&nbsp;<?= \think\Session::get('username') ?>
+                &nbsp;&nbsp;
+                [<a href="/index/user/index?flag=personal"><font color="red">个人中心</font></a>]
+                &nbsp;&nbsp;
+                [<a href="/index/history/index?flag=history"><font color="red">我看过的</font></a>]
+                &nbsp;&nbsp;
+                [<a href="/index/like/index?flag=like"><font color="red">我收藏的</font></a>]
+                &nbsp;&nbsp;
+                [<a href="/index/leave_message/index?flag=message"><font color="red">查看留言</font></a>]
+                &nbsp;&nbsp;
+                [<a href="/index/login/quit?flag=quit"><font color="red">退出登陆</font></a>]
+                &nbsp;&nbsp;
+                <?php } ?>
+            </div>
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle hamburger hamburger-close collapsed"
+                        data-target="#example-navbar-default-collapse" data-toggle="collapse">
+                    <span class="sr-only"></span>
+                    <span class="hamburger-bar"></span>
+                </button>
+                <a href="#" class="navbar-brand navbar-logo vertical-align" title="官网">
+                    <div class="vertical-align-middle"><img src="__INDEX__/static/images/vae_logo3.png" alt="logo" title="logo" style="height: 100px;width: 200px;"/></div>
+                </a>
+                <span class="navbar-green1" ></span>
+            </div>
+            <div class="collapse navbar-collapse navbar-collapse-toolbar" id="example-navbar-default-collapse">
+                <ul class="nav navbar-nav navbar-right navlist">
+                    <li class="margin-right-30"><a href="/index/index/index" title="网站首页" class="link {php}echo empty($_GET['flag'])?'active':''{/php}">网站首页</a></li>
+                    {foreach $nav_info as $key => $value}
+                    <li class="dropdown margin-right-30">
+                        <a
+                                class="dropdown-toggle link {php}echo isset($_GET['flag'])&&$_GET['flag']==$key?'active':''{/php}"
+                                data-toggle="dropdown"
+                                data-hover="dropdown"
+                                href=""
+                                aria-expanded="false"
+                                role="button"
+
+                                title="{$key}"
+                        >{$key} <span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-menu-right animate" role="menu">
+                            <li class="visible-xs-block"><a href="#"  title="全部">全部</a></li>
+                            {foreach $value as $d}
+                            <li><a href="{$d.src}?{$d.param}" class=""  title="{$d.title}">{$d.title}</a></li>
+                            {/foreach}
+                        </ul>
+                    </li>
+                    {/foreach}
+                    <li class="search">
+                        <a href="javascript:void(0);" title="搜索">
+                            <i class="fa fa-search font-size-15"></i>
+                        </a>
+                        <form class="search-box" method="get" action="/index/index/search">
+                            <input type="hidden" name="flag" value="<?php echo isset($_GET['flag']) ? $_GET['flag'] : 'search'; ?>">
+                            <input class="text" type="text" name="search_word" placeholder="输入文章标题关键字搜索">
+                            <input class="submit" type="submit">
+                            <i class="fa fa-search font-size-15"></i>
+                        </form>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>邮箱验证</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    </script>
+
+    <link href="__INDEX__/static/css/style_log.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="__INDEX__/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="__INDEX__/static/css/userpanel.css">
+    <link rel="stylesheet" type="text/css" href="__INDEX__/static/css/jquery.ui.all.css">
+    <style>
+        body.login{ background:url(__INDEX__/static/images/login_bgx.gif);}
+        .login_boder{ background: url(__INDEX__/static/images/login_m_bg.png) no-repeat;background-size:500px 600px; height:402px; overflow:hidden;}
+        .rem_sub input.sub_button{ float:right; width:122px; height:32px; background:url(__INDEX__/static/images/site_bg.png) no-repeat -153px -850px; border:none; color:#FFF; padding-bottom:2px; font-size:14px; font-weight:bold;}
+    </style>
+
+</head>
+
+<body class="login" mycollectionplug="bind">
+<div class="login_m">
+    <div class="login_logo"><img src="__INDEX__/static/images/vae_logo3.png" width="200" style="margin-bottom: -20px;"></div>
+    <div class="login_boder">
+
+        <div class="login_padding" id="login_model">
+            <form action="" id="form1" name="form1">
+                <input type="hidden" name="username" value="{$username}">
+                <input type="hidden" name="password" value="{$password}">
+            <h2>邮箱</h2>
+            <label>
+                <input type="text" id="email" name="email" class="txt_input txt_input2" onfocus="if (value ==&#39;Your name&#39;){value =&#39;&#39;}" onblur="if (value ==&#39;&#39;){value=&#39;Your name&#39;}" value="<?= isset($_GET['email'])?$_GET['email']:'' ?>">
+            </label>
+            <label for="">
+                <input class="btn btn-default btn-sm" id="send" onclick="settime(this)" value="点击发送验证码"/>
+                <script type="text/javascript">
+                    var countdown=60;
+                    function settime(val) {
+                        if (countdown != 0) {
+                            val.setAttribute("disabled", true);
+                            val.value="重新发送(" + countdown + ")";
+                            countdown--;
+                        }
+                        var time = setTimeout(function() {
+                            settime(val)
+                        },1000);
+                        if (countdown == 0) {
+                            clearTimeout(time);
+                            val.removeAttribute("disabled");
+                            val.value="点击发送验证码";
+                            countdown = 60;
+                        }
+                    }
+                </script>
+            </label>
+            <h2 style="margin-top: 10px;">输入验证码</h2>
+            <label>
+                <input type="text" name="yzm" id="yzm" class="txt_input" onfocus="if (value ==&#39;******&#39;){value =&#39;&#39;}" onblur="if (value ==&#39;&#39;){value=&#39;******&#39;}" value="">
+            </label>
+            <div class="rem_sub">
+                <a id="iforget" href="/index/register/index" style="margin-top: 10px;">返回注册</a>
+                <label>
+                    <input type="button" class="sub_button" name="button" id="button" value="点击验证" style="opacity: 0.7;margin-top: 30px;" onclick="submitFun()">
+                </label>
+            </div>
+            </form>
+        </div>
+
+        <script>
+            $(function () {
+                $("#send").click(function () {
+                    var email = $("#email").val();
+                    if (email == '') {
+                        alert('请输入邮箱');
+                        document.form1.email.focus();
+                        return false;
+                    } else {
+                        var email1 = document.form1.email.value;
+                        var reg1 = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/;
+                        if (!reg1.test(email1)) {
+                            alert('邮箱 格式不对');
+                            document.form1.email.focus();
+                            return false;
+                        } else {
+                            $.get('/index/register/send?email='+email, function (res) {
+                                var data = JSON.parse(res);
+                                alert(data.msg);
+                            })
+                        }
+                    }
+                });
+            });
+            function submitFun()
+            {
+                var email = document.getElementById("email").value;
+                if (email == '') {
+                    alert('请输入邮箱');
+                    document.form1.email.focus();
+                    return false;
+                }
+
+                var yzm = document.getElementById('yzm').value;
+                if (yzm == '') {
+                    alert('请输入验证码');
+                    document.form1.yzm.focus();
+                    return false;
+                }
+                var form1 = document.form1;
+                form1.action = "/index/register/register";
+                form1.submit();
+            }
+        </script>
+
+        <div id="forget_model" class="login_padding" style="display:none">
+            <br>
+
+            <h1>Forgot password</h1>
+            <br>
+            <div class="forget_model_h2">(Please enter your registered email below and the system will automatically reset users’ password and send it to user’s registered email address.)</div>
+            <label>
+                <input type="text" id="usrmail" class="txt_input txt_input2">
+            </label>
+
+
+            <div class="rem_sub">
+                <div class="rem_sub_l">
+                </div>
+                <label>
+                    <input type="submit" class="sub_buttons" name="button" id="Retrievenow" value="Retrieve now" style="opacity: 0.7;">
+                    　　　
+                    <input type="submit" class="sub_button" name="button" id="denglou" value="Return" style="opacity: 0.7;">　　
+
+                </label>
+            </div>
+        </div>
+
+        <!--login_padding  Sign up end-->
+    </div><!--login_boder end-->
+</div><!--login_m end-->
+<br> <br>
+
+
+</body></html>

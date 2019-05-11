@@ -1,0 +1,68 @@
+{layout name="layout1" /}
+
+<div class="met-banner banner-pc300 banner-max300 banner-mobile200">
+
+    <a data-original="__INDEX__/static/images/association.jpg" data-originals="__INDEX__/static/images/association.jpg" title=""  target='_blank'></a>
+
+</div>
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <hr class="col-md-6">
+</div>
+
+<div class="row" align="center">
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+        <ol class="breadcrumb">
+            <li><a href="/index/index/index">首页</a></li>
+            <li><a href="#">{$cate}</a></li>
+            <li class="active">{$name}</li>
+        </ol>
+    </div>
+</div>
+
+<section class="met-show animsition">
+    <div class="container">
+        <div class="row">
+            <div class="met-editor lazyload clearfix">
+                <div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6" align="center">
+                                <h3>{$name}<br/></h3>
+                            </div>
+                        </div>
+                        <div class="row" align="center">
+                            <table class="table table-bordered table-hover table-striped" style="margin-top: 20px;">
+                                <thead>
+                                <tr>
+                                    <th>项目名称</th>
+                                    <th>来源</th>
+                                    <th width="80">负责人</th>
+                                    <th>项目描述</th>
+                                    <th width="100">开始时间</th>
+                                    <th width="100">结束时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {foreach $scientific_project as $value}
+                                <tr>
+                                    <td>{$value.name}</td>
+                                    <td>{$value.from}</td>
+                                    <td>{$value.director}</td>
+                                    <td>{$value.desc}</td>
+                                    <td>{$value.start_date}</td>
+                                    <td>{$value.end_date}</td>
+                                </tr>
+                                {/foreach}
+                                </tbody>
+                            </table>
+                        </div>
+                        {$scientific_project->render()}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

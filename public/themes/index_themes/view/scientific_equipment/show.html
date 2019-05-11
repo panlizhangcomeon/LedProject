@@ -1,0 +1,51 @@
+{layout name="layout1" /}
+
+<section class="met-shownews animsition">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 met-shownews-body">
+                <div class="row">
+                    <div class="met-shownews-header">
+                        <h3>{$data.name}</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                简介：{$data.desc}<br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="met-editor lazyload clearfix">
+                        <img src="{$data.img}" alt="" width="300">
+                    </div>
+                    <div class="met-shownews-footer">
+
+                        <ul class="pager pager-round">
+                            <?php if (!empty($data_pre)): ?>
+                            <li class="previous ">
+                                <a href="/index/scientific_equipment/show?id={$data_pre.id}&flag=<?= $_GET['flag'] ?>" title="{$data_pre.name}" style="max-width: 25em;
+overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis; /*超出部分用...代替*/">
+                                    上一个
+                                    <span aria-hidden="true" class='hidden-xs hidden-sm'>：{$data_pre.name}</span>
+                                </a>
+                            </li>
+                            <?php endif; ?>
+                            <?php if (!empty($data_next)): ?>
+                            <li class="next ">
+                                <a href="/index/scientific_equipment/show?id={$data_next.id}&flag=<?= $_GET['flag'] ?>" title="{$data_next.name}" style="max-width: 25em;
+overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis; /*超出部分用...代替*/">
+                                    下一个
+                                    <span aria-hidden="true" class='hidden-xs hidden-sm'>：{$data_next.name}</span>
+                                </a>
+                            </li>
+                            <?php endif; ?>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</html>

@@ -1,0 +1,67 @@
+{layout name="layout2" /}
+
+<section class="met-shownews animsition">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 met-shownews-body">
+                <div class="row">
+                    <div class="met-shownews-header">
+                        <h1>{$data.title}</h1>
+                        <div class="info">
+							<span>
+								{$data.publish_date}
+							</span>
+							<span>
+								LED照明驱动
+							</span>
+                            <span>
+                                来源：{$data.source}
+                            </span>
+                            <span>
+                                编辑：{$data.editor}
+                            </span>
+							<span>
+								<i class="icon wb-eye margin-right-5" aria-hidden="true"></i>{$read}
+							</span>
+                        </div>
+                    </div>
+                    <div class="met-editor lazyload clearfix">
+                        <div>
+                            {$data.content}
+                            <div class="center-block met_tools_code">
+                                <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div>
+                        </div>
+                    </div>
+                    <div class="met-shownews-footer">
+
+                        <ul class="pager pager-round">
+                            <?php if ($_GET['flag'] != 'search'): ?>
+
+                            <?php if (!empty($data_pre)): ?>
+                            <li class="previous ">
+                                <a href="/index/central_information/show?id={$data_pre.id}&flag=<?= $_GET['flag'] ?>" title="{$data_pre.title}" style="max-width: 25em;
+overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis; /*超出部分用...代替*/">
+                                    上一篇
+                                    <span aria-hidden="true" class='hidden-xs hidden-sm'>：{$data_pre.title}</span>
+                                </a>
+                            </li>
+                            <?php endif; ?>
+                            <?php if (!empty($data_next)): ?>
+                            <li class="next ">
+                                <a href="/index/central_information/show?id={$data_next.id}&flag=<?= $_GET['flag'] ?>" title="{$data_next.title}" style="max-width: 25em;
+overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis; /*超出部分用...代替*/">
+                                    下一篇
+                                    <span aria-hidden="true" class='hidden-xs hidden-sm'>：{$data_next.title}</span>
+                                </a>
+                            </li>
+                            <?php endif; ?>
+
+                            <?php endif; ?>
+                        </ul>
+                    </div>
+                </div>
+            </div>

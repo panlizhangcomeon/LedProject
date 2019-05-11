@@ -1,0 +1,72 @@
+{layout name="layout1" /}
+
+<div class="met-banner banner-pc300 banner-max300 banner-mobile200">
+
+    <a data-original="__INDEX__/static/images/association.jpg" data-originals="__INDEX__/static/images/association.jpg" title=""  target='_blank'></a>
+
+</div>
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <hr class="col-md-6">
+</div>
+
+<div class="row" align="center">
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+        <ol class="breadcrumb">
+            <li><a href="/index/index/index">首页</a></li>
+            <li><a href="#">{$cate}</a></li>
+            <li class="active">{$name}</li>
+        </ol>
+    </div>
+</div>
+
+<section class="met-show animsition">
+    <div class="container">
+        <div class="row">
+            <div class="met-editor lazyload clearfix">
+                <div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6" align="center">
+                                <h3>{$name}<br/></h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <table class="table table-bordered table-hover table-striped" style="margin-top: 20px;">
+                                <thead>
+                                <tr>
+                                    <th>专利名称</th>
+                                    <th>发明人</th>
+                                    <th>授权专利号</th>
+                                    <th>年份</th>
+                                    <th>授权地区</th>
+                                    <th>转让情况</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {foreach $patent as $value}
+                                <tr>
+                                    <td>{$value.name}</td>
+                                    <td>{$value.inventor}</td>
+                                    <td>{$value.patent_number}</td>
+                                    <td>{$value.year}</td>
+                                    <td>{$value.enable_area}</td>
+                                    <td>
+                                        {php}
+                                        echo $value['transfer_status'] == 1 ? '已转让' : '未转让';
+                                        {/php}
+                                    </td>
+                                </tr>
+                                {/foreach}
+                                </tbody>
+                            </table>
+                        </div>
+                        {$patent->render()}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

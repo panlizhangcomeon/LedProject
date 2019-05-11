@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>vaeThink</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="__ADMIN__/lib/layui/css/layui.css"  media="all">
+    <style type="text/css">
+        .div { margin:0 auto; width:100%; overflow:hidden; }
+        .line { position:relative; width:300px; text-align:left }
+        .line span.span { float:left; padding-top:2px; }
+        .file { position:absolute; left:0; width:250px; top:0;
+            height:28px; filter:alpha(opacity=0); opacity:0; cursor: pointer }
+        .file1 { float:left; margin-left:8px; z-index:1; width:66px;
+            height:28px; line-height:28px; background:url(/upload/liulan.gif) no-repeat 0 0;
+            text-indent:-9999px; cursor: pointer }
+        .inputstyle { border:1px solid #BEBEBE; width:170px; float:left;
+            height:23px; line-height:23px; background:#FFF; z-index:99 }
+    </style>
+</head>
+<body class="vae-body">
+
+<div class="vae-content">
+    <table class="layui-hide" id="test" lay-filter="test"></table>
+</div>
+
+<script type="text/html" id="toolbarDemo">
+        <form action="/admin/document_center/addSubmit" enctype="multipart/form-data" method="post">
+            <div class="div">
+            <div class="line">
+                <span class="span">
+                <input name="" type="text" id="viewfile"
+                       onmouseout="document.getElementById('upload').style.display='none';"
+                       class="inputstyle" />
+                </span>
+                <label for="unload"
+                       onmouseover="document.getElementById('upload').style.display='block';"
+                       class="file1">浏览...</label>
+                <input type="file"
+                       onchange="document.getElementById('viewfile').value=this.value;this.style.display='none';"
+                       class="file" id="upload" name="doc"/>
+            </div>
+        </div>
+            <span><font color="red">(支持doc,docx,xlsx,xls格式文档)</font></span><br>
+            <input type="submit" value="上传文档" style="margin-top: 0;" class="layui-btn layui-btn-normal layui-btn-sm layui-btn-radius"/>
+        </form>
+</script>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script src="__ADMIN__/lib/layui/layui.js" charset="utf-8"></script>
+
+<script>
+    layui.config({
+        base: '/themes/admin_themes/module/'
+    }).use(['table','vaeyo','form'], function(){
+        var table = layui.table,
+            $ = layui.$;
+
+        table.render({
+            elem: '#test',
+            toolbar: '#toolbarDemo',
+            url: '/admin/document_center/getMenuList', //数据接口
+            page: true, //开启分页
+            limit: 15,
+            cols: [[ //表头
+                {field: 'name', title: '文档名称', align:'center'},
+                {field: 'date', title: '上传时间', sort: true, align:'center'},
+                {field: 'right', toolbar: '#barDemo', width:150, align:'center'}
+            ]]
+        });
+
+        //监听行工具事件
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            //console.log(obj)
+            if(obj.event === 'del'){
+                layer.confirm('确定删除吗?', {icon: 3, title:'提示'}, function(index){
+                    $.ajax({
+                        url:"/admin/document_center/delete",
+                        data:{name:data.name,date:data.date},
+                        contentType:"application/x-www-form-urlencoded",
+                        success:function(res){
+                            layer.msg(res.msg);
+                            if(res.code==1){
+                                obj.del();
+                            }
+                        }
+                    });
+                    layer.close(index);
+                });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

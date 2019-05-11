@@ -1,0 +1,157 @@
+{layout name="layout1" /}
+
+<div class="met-banner banner-pc300 banner-max300 banner-mobile200">
+    <a data-original="__INDEX__/static/images/association.jpg" data-originals="__INDEX__/static/images/association.jpg" title=""  target='_blank'></a>
+</div>
+
+<section class="met-message animsition">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="met-message-body">
+                        <ul class="list-group list-group-dividered list-group-full met-page-ajax">
+                            {foreach $data as $value}
+                            <li class="list-group-item">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <i class="icon wb-user-circle" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">
+                                            <small class="pull-right">{$value.created_at}</small>
+                                            {$value.name}
+                                        </h4>
+                                        <p>{$value.leave_message}</p>
+
+                                        {neq name="$value.reply" value=""}
+                                        <div class="content well margin-bottom-0">
+                                            {$value.reply}
+                                        </div>
+                                        {/neq}
+                                    </div>
+                                </div>
+                            </li>
+                            {/foreach}
+                        </ul>
+
+                        <div class="row">
+                            <div class='met_pager'>
+                                {$data->render()}
+                            </div>
+                        </div>
+                        <div class="met-page-ajax-body ">
+                            <button type="button" class="btn btn-default btn-block btn-squared ladda-button" id="met-page-btn" data-style="slide-left" data-url="http://www.lulian.cn/message/?lang=cn&class1=25&class2=0&class3=0&mbpagelist=1" data-page="1"><i class="icon wb-chevron-down margin-right-5" aria-hidden="true"></i>加载更多</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <script language='javascript'>
+                function metmessagesubmit1() {
+                    var name = document.myform.name.value.replace(/(^\s*)|(\s*$)/g, '');
+                    if (name == 0) {
+                        alert('姓名 不能为空');
+                        document.myform.name.focus();
+                        return false;
+                    }
+                    var phone = document.myform.tel.value.replace(/(^\s*)|(\s*$)/g, '');
+                    var tel = document.myform.tel.value;
+                    var reg = /^[1][34578][0-9]{9}$/;
+                    if (phone == 0) {
+                        alert('手机号 不能为空');
+                        document.tel.phone.focus();
+                        return false;
+                    }
+                    if (!reg.test(tel)) {
+                        alert('手机号 格式不对');
+                        document.tel.phone.focus();
+                        return false;
+                    }
+                    var email = document.myform.email.value.replace(/(^\s*)|(\s*$)/g, '');
+                    var email1 = document.myform.email.value;
+                    var reg1 = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/;
+                    if (email == 0) {
+                        alert('Email 不能为空');
+                        document.myform.email.focus();
+                        return false;
+                    }
+                    if (!reg1.test(email1)) {
+                        alert('邮箱 格式不对');
+                        document.myform.email.focus();
+                        return false;
+                    }
+                    var content = document.myform.leave_message.value.replace(/(^\s*)|(\s*$)/g, '');
+                    if (content == 0) {
+                        alert('留言内容 不能为空');
+                        document.myform.leave_message.focus();
+                        return false;
+                    }
+                    var captcha = document.myform.captcha.value.replace(/(^\s*)|(\s*$)/g, '');
+                    if (captcha == 0) {
+                        alert('验证码 不能为空');
+                        document.myform.captcha.focus();
+                        return false;
+                    }
+                }
+                function verification() {
+                    document.getElementById('new_code').click();
+                }
+            </script>
+
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="met-message-submit">
+                        <form enctype='multipart/form-data' method='POST' name='myform' onSubmit='return metmessagesubmit1();' action='/index/leave_message/add' target='_self'>
+                            <div class="form-group">
+
+                                <div>
+                                    <input name='name' class='form-control' type='text' placeholder='姓名 ' autocomplete='off' data-fv-notempty="true" data-fv-message="不能为空" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div>
+                                    <input name='tel' class='form-control' type='text' placeholder='电话 ' autocomplete='off' data-fv-notempty="true" data-fv-message="不能为空" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div>
+                                    <input name='email' class='form-control' type='text' placeholder='Email ' autocomplete='off' data-fv-notempty="true" data-fv-message="不能为空" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div>
+                                    <textarea name='leave_message' class='form-control' data-fv-notempty="true" data-fv-message="不能为空" placeholder='留言内容 ' rows='5'></textarea>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <div class="input-group input-group-icon">
+                                    <input name='captcha' placeholder='验证码' onKeyUp='pressCaptcha(this)' type='text' class='code' id='code' size='6' maxlength='8' style='width:50px' onclick="verification()">
+						            <span class="input-group-addon">
+							        <img src="/captcha" class="input" height="37" width="120" id="captcha" onclick="this.src='/captcha?seed='+Math.random()">
+						            </span>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group margin-bottom-0">
+                                <button type="submit" class="btn btn-primary btn-block btn-squared">提交</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,93 @@
+{layout name="layout1" /}
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <hr class="col-md-6">
+</div>
+
+<div class="row" align="center">
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+        <ol class="breadcrumb">
+            <li><a href="/index/index/index">首页</a></li>
+            <li><a href="#">个人中心</a></li>
+        </ol>
+    </div>
+</div>
+
+<section class="met-show animsition">
+    <div class="container">
+        <div class="row">
+            <div class="met-editor lazyload clearfix">
+                <div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3>个人中心<br/></h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <form action="" name="form3">
+                                    <div class="form-group">
+                                        <label for="exampleInputUsername">用户名</label>
+                                        <input type="text" class="form-control" id="exampleInputUsername" value="{$data.username}" name="username" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword">密码</label>
+                                        <input type="password" class="form-control" id="exampleInputPassword" value="{$data.password}" name="password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">邮箱</label>
+                                        <input type="email" class="form-control" id="exampleInputEmail1" name="email" value="{$data.email}">
+                                    </div>
+                                    <div class="form-group">
+                                        <?php if ($data['is_vip'] == 0) { ?>
+                                            <font color="red">[您还不是会员，想要下载本站资料，请先成为本站会员]</font>
+                                            <a class="btn btn-primary btn-sm" href="/index/user/pay?flag=pay">成为会员</a>
+                                        <?php } else { ?>
+                                            <font color="red">[您是本站会员，享受本站资料无限制下载]</font>
+                                        <?php } ?>
+                                    </div>
+                                    <input type="button" class="btn btn-default" value="修改" onclick="submitFun()">
+                                </form>
+
+                                <script>
+                                    function submitFun()
+                                    {
+                                        var password = document.getElementById("exampleInputPassword").value;
+                                        if (password == '') {
+                                            alert('密码不能为空');
+                                            document.form3.password.focus();
+                                            return false;
+                                        }
+
+                                        var email = document.getElementById("exampleInputEmail1").value;
+                                        if (email == '') {
+                                            alert('邮箱不能为空');
+                                            document.form3.email.focus();
+                                            return false;
+                                        }
+
+                                        var reg1 = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/;
+                                        if (!reg1.test(email)) {
+                                            alert('邮箱 格式不对');
+                                            document.form3.email.focus();
+                                            return false;
+                                        }
+
+                                        var form3 = document.form3;
+                                        form3.action = "/index/user/changeInfo?flag=personal";
+                                        form3.submit();
+                                    }
+                                </script>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

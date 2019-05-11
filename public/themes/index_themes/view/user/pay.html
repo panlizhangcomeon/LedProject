@@ -1,0 +1,72 @@
+{layout name="layout1" /}
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <hr class="col-md-6">
+</div>
+
+<div class="row" align="center">
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+        <ol class="breadcrumb">
+            <li><a href="/index/index/index">首页</a></li>
+            <li><a href="#">个人中心</a></li>
+        </ol>
+    </div>
+</div>
+
+<style type="text/css">
+    .div { margin:0 auto; width:100%; overflow:hidden; }
+    .line { position:relative; width:300px; text-align:left }
+    .line span.span { float:left; padding-top:2px; }
+    .file { position:absolute; left:0; width:250px; top:0;
+        height:28px; filter:alpha(opacity=0); opacity:0; cursor: pointer }
+    .file1 { float:left; margin-left:8px; z-index:1; width:66px;
+        height:28px; line-height:28px; background:url(/upload/liulan.gif) no-repeat 0 0;
+        text-indent:-9999px; cursor: pointer }
+    .inputstyle { border:1px solid #BEBEBE; width:170px; float:left;
+        height:23px; line-height:23px; background:#FFF; z-index:99 }
+</style>
+
+<section class="met-show animsition">
+    <div class="container">
+        <div class="row">
+            <div class="met-editor lazyload clearfix">
+                <div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3>个人中心<br/></h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                扫码支付10元会费，付款成功后上传付款凭证，管理员将在24小时内审核
+                                <img src="__INDEX__/static/images/wxpay.jpg" alt="" width="150" class="img-thumbnail">
+                                <br>
+                                <form action="/index/user/upload" enctype="multipart/form-data" method="post">
+                                    <div class="div">
+                                        <div class="line">
+                                            <span class="span">
+                                            <input name="" type="text" id="viewfile"
+                                                   onmouseout="document.getElementById('upload').style.display='none';"
+                                                   class="inputstyle" />
+                                            </span>
+                                            <label for="unload"
+                                                   onmouseover="document.getElementById('upload').style.display='block';"
+                                                   class="file1">浏览...</label>
+                                            <input type="file"
+                                                   onchange="document.getElementById('viewfile').value=this.value;this.style.display='none';"
+                                                   class="file" id="upload" name="image"/>
+                                        </div>
+                                    </div>
+                                    <input type="submit" value="上传支付凭证截图" class="btn btn-primary btn-sm"/>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

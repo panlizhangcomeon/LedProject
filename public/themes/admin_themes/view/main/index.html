@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>vaeThink</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="/themes/admin_themes/lib/layui/css/layui.css"  media="all">
+  <style type="text/css">
+    .layui-anim .vae-card .layui-icon{
+      width:50px;
+      height:50px;
+      line-height: 50px;
+      text-align: center;
+      display: block;
+      border-radius: 50%;
+      background-color: #FF5722;
+      color:#fff;
+      opacity: .9;
+      font-size: 24px;
+      float: left;
+    }
+    .vaeyo-main-header{
+      height: 280px;
+    }
+    .vae-card{
+      height:50px;
+      padding:20px;
+    }
+    .vae-card .vae-card-right{
+      float: left;
+      display: block;
+      width:calc(100% - 100px);
+      margin-left: 20px;
+      height:100%;
+    }
+    .vae-card .vae-card-right h2{
+      line-height: 50px;
+    }
+  </style>
+</head>
+<body class="vae-body">
+
+  <div style="background-color: #f1f2f7;padding-top:10px;padding-right: 10px;padding-left: 10px;">
+    <div class="layui-row layui-col-space25">
+      <div class="layui-col-md3 layui-anim layui-anim-scale">
+        <div class="layui-card">
+          <div class="layui-card-body vae-card">
+            <a href="javascript:;">
+              <i class="layui-icon" style="background-color: #5FB878" title="总PV数">PV</i>
+              <div class="vae-card-right">
+                <h2>{$total_pv}</h2>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="layui-col-md3 layui-anim layui-anim-scale">
+        <div class="layui-card">
+          <div class="layui-card-body vae-card">
+            <a href="javascript:;">
+              <i class="layui-icon" title="总UV数">UV</i>
+              <div class="vae-card-right">
+                <h2>{$total_uv}</h2>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="layui-col-md3 layui-anim layui-anim-scale">
+        <div class="layui-card">
+          <div class="layui-card-body vae-card">
+            <a href="javascript:;">
+              <i class="layui-icon" style="background-color: #01AAED" title="总IP数">IP</i>
+              <div class="vae-card-right">
+                <h2>{$total_ip}</h2>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="layui-col-md3 layui-anim layui-anim-scale">
+        <div class="layui-card">
+          <div class="layui-card-body vae-card">
+            <a href="javascript:;">
+              <i class="layui-icon layui-icon-user" style="background-color: #2F4056" title="总用户数"></i>
+              <div class="vae-card-right">
+                <h2>{$total_msg}</h2>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="layui-col-md8">
+        <div class="layui-row layui-col-space25">
+          <div class="layui-col-md5 layui-anim layui-anim-scale">
+            <div class="layui-card">
+              <div class="layui-card-body">
+                <h3 align="center" style="color: #696969;">后台登陆者统计</h3>
+                <table id="comments" lay-filter="comments"></table>
+              </div>
+            </div>
+          </div>
+          <div class="layui-col-md7 layui-anim layui-anim-scale">
+            <div class="layui-card">
+              <div class="layui-card-body">
+                <h3 align="center" style="color: #696969;">网站前台七日访问量统计</h3>
+                <table id="message" lay-filter="message"></table>
+              </div>
+            </div>
+          </div>
+          <div class="layui-col-md12 layui-anim layui-anim-scale">
+            <div class="layui-card">
+              <div class="layui-card-body">
+                <div class="vaeyo-main-header" id="vaeyo-main-header"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="layui-col-md4 layui-anim layui-anim-scale">
+        <div class="layui-card">
+          <div class="layui-card-body">
+            <h3 align="center" style="color: #696969;">后台公告</h3>
+            <table class="layui-table" lay-skin="nob" lay-size="sm">
+              <colgroup>
+                <col width="100">
+                <col>
+              </colgroup>
+              <tbody>
+                <tr>
+                  <td><b>猪年快乐</b></td>
+                  <td>祝大家猪年快乐！</td>
+                </tr>
+                <tr>
+                  <td><b>天气状况</b></td>
+                  <td>{$weather.city}，今天是{$weather.date}，风向为{$weather.fengxiang}，天气{$weather.type}，当前温度{$weather.wendu}度</td>
+                </tr>
+                <tr>
+                  <td><b>温馨提示</b></td>
+                  <td>今天最高温度{$weather.high}，最低温度{$weather.low}，{$weather.ganmao}</td>
+                </tr>
+                <tr>
+                  <td><b>BUG反馈</b></td>
+                  <td><a href="mailto:948360675@qq.com" target="_blank"><span class="layui-badge layui-bg-cyan">948360675@qq.com</span></a></td>
+                </tr>
+                {php} if (extension_loaded('fileinfo') != true): {/php}
+                <tr>
+                  <td><span class="layui-badge"><b>警告</b></span></td>
+                  <td><span class="layui-badge">php_fileinfo扩展没有开启，您将无法正常上传文件！</span></td>
+                </tr>
+                {php} endif; {/php}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="layui-col-md4 layui-anim layui-anim-scale">
+        <div class="layui-card">
+          <div class="layui-card-body">
+            <h3 align="center" style="color: #696969;">服务器信息</h3>
+            <table class="layui-table" lay-skin="" lay-size="sm">
+              <colgroup>
+                <col width="150">
+                <col>
+              </colgroup>
+              <tbody>
+                <tr>
+                  <td><b>操作系统</b></td>
+                  <td>{:vae_get_system_info('os')}</td>
+                </tr>
+                <tr>
+                  <td><b>PHP版本</b></td>
+                  <td>{:vae_get_system_info('php')}</td>
+                </tr>
+                <tr>
+                  <td><b>Apache版本</b></td>
+                  <td>{:vae_get_system_info('apache')}</td>
+                </tr>
+                <tr>
+                  <td><b>Mysql版本</b></td>
+                  <td>{:vae_get_system_info('mysql')}</td>
+                </tr>
+                <tr>
+                  <td><b>Redis版本</b></td>
+                  <td>{:vae_get_system_info('redis')}</td>
+                </tr>
+                <tr>
+                  <td><b>vaeThink版本</b></td>
+                  <td>{:VAE_VERSION}</td>
+                </tr>
+                <tr>
+                  <td><b>ThinkPHP版本</b></td>
+                  <td>{:THINK_VERSION}</td>
+                </tr>
+                <tr>
+                  <td><b>Layui版本</b></td>
+                  <td>{:LAYUI_VERSION}</td>
+                </tr>
+                <tr>
+                  <td><b>上传附件限制</b></td>
+                  <td>{:vae_get_system_info('upload_max_filesize')}</td>
+                </tr>
+                <tr>
+                  <td><b>执行时间限制</b></td>
+                  <td>{:vae_get_system_info('max_execution_time')}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="layui-col-md2 layui-anim layui-anim-scale">
+        <div class="layui-card">
+          <div class="layui-card-body">
+            <div class="layui-btn-container" style="padding:3px 0">
+              <div><a class="layui-btn layui-btn-fluid layui-btn-primary" href="http://www.vaethink.com" target="_blank">官方网站</a></div>
+              <div><a class="layui-btn layui-btn-fluid layui-btn-primary" href="http://think.vaethink.com" target="_blank">官方社区</a></div>
+              <div><a class="layui-btn layui-btn-fluid layui-btn-primary" href="https://jq.qq.com/?_wv=1027&k=5bmwTll" target="_blank">官方交流群</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="layui-col-md2 layui-anim layui-anim-scale">
+        <div class="layui-card">
+          <div class="layui-card-body">
+            <div class="layui-btn-container" style="padding:3px 0">
+              <div><a class="layui-btn layui-btn-fluid layui-btn-primary" href="http://www.vaethink.com/doc/" target="_blank">开发手册</a></div>
+              <div><a class="layui-btn layui-btn-fluid layui-btn-primary" href="https://www.kancloud.cn/manual/thinkphp5" target="_blank">TP开发手册</a></div>
+              <div><a class="layui-btn layui-btn-fluid layui-btn-primary" href="https://www.layui.com/doc/" target="_blank">Layui开发手册</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+  <script src="/themes/admin_themes/lib/layui/layui.js" charset="utf-8"></script>
+  <script>
+    layui.config({
+        base: '/themes/admin_themes/module/'
+    }).define(['table','echarts','layer','element'], function(exports){
+      var $ = layui.jquery,layer = layui.layer,element = layui.element,table = layui.table;
+
+      var myChart = echarts.init(document.getElementById('vaeyo-main-header'));
+        var data = {
+          "time":[{$x}],
+          "pv":[{$y_pv}],
+          "uv":[{$y_uv}]
+        };
+        option = {
+            title: {
+                text: '七日UV/PV统计图'
+            },
+            tooltip : {
+              trigger: 'axis'
+            },
+            legend: {
+              data:['','']
+            },
+            tooltip : {
+              trigger: 'axis'
+            },
+            legend: {
+              data:['UV','PV']
+            },
+            grid: {
+                top:'10%',
+                left: '1%',
+                right: '2%',
+                bottom: '5%',
+                containLabel: true
+            },
+            xAxis : [{
+              type : 'category',
+              boundaryGap : false,
+              data: data.time
+            }],
+            yAxis : [{
+              type : 'value',
+              splitLine: {show: false}
+            }],
+            series : [{
+              name:'UV',
+              type:'line',
+              smooth: true,
+              itemStyle: {normal: {color:'#009688'}},
+              lineStyle:{normal:{color:'#009688',width:1}},
+              areaStyle: {normal:{color:'#009688'}},
+              data: data.uv
+            },{
+              name:'PV',
+              type:'line',
+              smooth: true,
+              itemStyle: {normal: {color:'#01AAED'}},
+              lineStyle:{normal:{color:'#01AAED',width:1}},
+              areaStyle: {normal:{color:'#01AAED'}},
+              data: data.pv
+            }]
+        };
+        myChart.setOption(option);
+        $(window).on('resize', function () {
+          myChart.resize();
+        });
+
+        //管理员访问记录
+        table.render({
+          elem: '#comments'
+          ,height: 250
+          ,url: '/admin/admin/getAdminList' //数据接口
+          ,cols: [[ //表头
+            {field: 'username', title: '管理员'}
+            ,{field: 'nickname', title: '昵称'}
+            ,{field: 'last_login_time', title: '最后上线时间', sort: true, width: 150}
+          ]]
+          ,size: 'sm'
+        });
+
+        //获得七日访问数据
+        table.render({
+          elem: '#message'
+          ,height: 250
+          ,url: '/admin/hook/getVisitData' //数据接口
+          ,cols: [[ //表头
+             {field: 'day', title: '日期', width:95}
+            ,{field: 'pv_count', title: '日浏览次数(PV)'}
+            ,{field: 'uv_count', title: '日独立访客(UV)'}
+            ,{field: 'ip_count', title: '日独立IP(IP)'}
+          ]]
+          ,size: 'sm'
+        });
+    
+      exports('main', {});
+  });  
+  </script> 
+
+</body>
+</html>

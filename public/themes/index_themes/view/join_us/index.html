@@ -1,0 +1,65 @@
+{layout name="layout1" /}
+
+<div class="met-banner banner-pc300 banner-max300 banner-mobile200">
+
+    <a data-original="__INDEX__/static/images/join.jpg" data-originals="__INDEX__/static/images/join.jpg" title="联系我们"  target='_blank'></a>
+
+</div>
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <hr class="col-md-6">
+</div>
+
+<div class="row" align="center">
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+        <ol class="breadcrumb">
+            <li><a href="/index/index/index">首页</a></li>
+            <li><a href="#">{$cate}</a></li>
+            <li class="active">{$name}</li>
+        </ol>
+    </div>
+</div>
+
+<section class="met-show animsition">
+    <div class="container">
+        {foreach $join_us as $value}
+        <div class="row">
+            <div class="met-editor lazyload clearfix">
+                <div>
+                    <div class="container">
+                        <h3>
+                            <span style="font-weight: 700;">
+                                <span style="font-size: 18px;">{$value.department}</span>
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>
+                                    <span style="font-size: 14px;">电话：{$value.tel}</span>
+                                </p>
+                                <p>
+                                    <span style="font-size: 14px;">职能简介：{$value.desc}</span>
+                                </p>
+                                <p>
+                                    <span style="font-size: 14px;">地址：{$value.locate}</span>
+                                </p>
+                                <p>
+                                    <span style="font-size: 14px;">邮编：{$value.zip_code}</span>
+                                </p>
+                                <p>
+                                    <br/>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {/foreach}
+    </div>
+</section>
+
