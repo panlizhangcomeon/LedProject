@@ -17,6 +17,15 @@
 							<span>
 								<i class="icon wb-eye margin-right-5" aria-hidden="true"></i>{$read}
 							</span>
+                            <div>
+                                {eq name="is_like" value="1"}
+                                <span class="glyphicon glyphicon-heart" style="cursor: pointer;" id="like1" onclick="changeLike(0, {$history_id})"></span>
+                                {else/}
+                                <span class="glyphicon glyphicon-heart-empty" style="cursor: pointer;" id="noLike1" onclick="changeLike(1, {$history_id})"></span>
+                                {/eq}
+                                <span class="glyphicon glyphicon-heart" id="like" style="cursor: pointer;display: none;" onclick="changeLike(0, {$history_id})"></span>
+                                <span class="glyphicon glyphicon-heart-empty" id="noLike" style="cursor: pointer;display: none;" onclick="changeLike(1, {$history_id})"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="met-editor lazyload clearfix">

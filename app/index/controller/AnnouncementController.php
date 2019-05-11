@@ -44,12 +44,21 @@ class AnnouncementController extends ControllerIndex
 
         $pre_next_data = getPreNextData($all_id, $id, 'announcement');
 
+        //获得用户收藏信息
+        $history = parent::getHistory($data['title'], $id, 'announcement');
+        if (!empty($history)) {
+            $is_like = $history['is_like'];
+            $history_id = $history['id'];
+        }
+
         $this->arrReturn = parent::getReturnArr(6, 3, 2);
         $this->arrReturn['data'] = $data;
         $this->arrReturn['data_pre'] = $pre_next_data['data_pre'];
         $this->arrReturn['data_next'] = $pre_next_data['data_next'];
         $this->arrReturn['order_news'] = parent::getOrderNewsList();
         $this->arrReturn['read'] = empty($read) ? 0 : $read;
+        $this->arrReturn['is_like'] = $is_like ? 1 : 0;
+        $this->arrReturn['history_id'] = $history_id;
 
         return view('', $this->arrReturn);
     }

@@ -19,7 +19,7 @@ class LikeController extends ControllerIndex
     {
         $username = Session::get('username');
         $flag = vae_get_param('flag');
-        $data = Db::name('history')->where(['username' => $username, 'is_like' => 1])->paginate(20);
+        $data = Db::name('history')->where(['username' => $username, 'is_like' => 1])->order('updated_at', 'desc')->paginate(20);
 
         $this->arrReturn = parent::getReturnArr(6, 3, 1);
         $this->arrReturn['data'] = $data;
@@ -35,7 +35,7 @@ class LikeController extends ControllerIndex
         $message = ['code' => 0, 'msg' => '成功', 'status' => $status];
         $history_id = (int)vae_get_param('history_id');
         $behavior = $status ? '收藏' : '取消收藏';
-        $reg = Db::name('history')->update(['id' => $history_id, 'is_like' => $status]);
+        $reg = Db::name('history')->update(['id' => $history_id, 'is_like' => $status, 'updated_at' => date('Y-m-d H:i:s')]);
         if ($reg) {
             $message['code'] = 1;
             $message['msg'] = $behavior . '成功';
