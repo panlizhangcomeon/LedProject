@@ -1,0 +1,1 @@
+<?php return ['smtp'=>'smtp.qq.com','username'=>'948360675@qq.com','password'=>'gvqidxsbinxabdjc','port'=>'465','email'=>'948360675@qq.com','from'=>'Led照明驱动','template'=>'<p>Led照明驱动，欢迎成为本网站用户！</p>'];
