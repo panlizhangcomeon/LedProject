@@ -133,6 +133,8 @@ class ControllerIndex extends Controller
                 $param['created_at'] = date('Y-m-d H:i:s');
                 $param['updated_at'] = date('Y-m-d H:i:s');
                 Db::name('history')->insert($param);
+            } else {
+                Db::name('history')->update(['updated_at' => date('Y-m-d H:i:s'), 'id' => $history['id']]);
             }
         }
     }
@@ -154,5 +156,44 @@ class ControllerIndex extends Controller
         } else {
             return false;
         }
+    }
+
+    /**
+     * @desc 递归获得文章对应评论列表
+     * @param $cate
+     * @param $cid
+     * @param int $parent_id
+     * @param array $result
+     * @return array|false|mixed|\PDOStatement|string|\think\Collection
+     */
+    protected function getCommentList($cate, $cid, $parent_id = 0, &$result = [])
+    {
+        $arr = Db::name('comment')->where([
+            'cate' => $cate,
+            'cid' => $cid,
+            'parent_id' => $parent_id
+        ])->order('comment_time', 'desc')->select();
+        if (empty($arr)) {
+            return $arr;
+        }
+        foreach ($arr as $cm) {
+            $thisArr = &$result[];
+            $cm['children'] = $this->getCommentList($cate, $cid, $cm['id'], $thisArr);
+            $thisArr= $cm;
+        }
+        return $result;
+    }
+
+    /**
+     * @desc 获得评论总数和列表
+     * @param $cate
+     * @param $cid
+     * @return array
+     */
+    public function comment($cate, $cid)
+    {
+        $num = Db::name('comment')->where(['cate' => $cate, 'cid' => $cid])->count(); //获取评论总数
+        $data = $this->getCommentList($cate, $cid); //获取评论列表
+        return ['num' => $num, 'commentList' => $data];
     }
 }

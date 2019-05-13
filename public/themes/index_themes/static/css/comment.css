@@ -1,0 +1,51 @@
+ul li{
+    list-style: none;
+}
+
+.cm-header{
+    font-size: 14px;
+    color: grey;
+}
+
+.cm-content{
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 20px #c3c3c3;
+    margin: 20px 0;
+}
+.cm-content p{
+    margin: 0;
+    font-size: 16px;
+    line-height: 20px;
+}
+.cm-header span,.cm-header a{
+    margin-right: 10px;
+}
+
+.comment_header{
+    margin-bottom: 30px;
+}
+.comment_header textarea{
+    min-width: 100%;
+    max-width: 100%;
+    height: 100px;
+}
+
+.div-txt-submit a{
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    display: block;
+    background: #0000b3;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    letter-spacing: 2px;
+    margin-top: 20px;
+}
+
+.comment-ul>li{
+    border-bottom: 1px solid grey;
+    margin-bottom: 20px;
+}

@@ -51,6 +51,9 @@ class PolicyBroadcastController extends ControllerIndex
             $history_id = $history['id'];
         }
 
+        //获得文章评论
+        $comment = parent::comment('policy_broadcast', $id);
+
         $this->arrReturn = parent::getReturnArr(6, 3, 3);
         $this->arrReturn['data'] = $data;
         $this->arrReturn['data_pre'] = $pre_next_data['data_pre'];
@@ -59,6 +62,10 @@ class PolicyBroadcastController extends ControllerIndex
         $this->arrReturn['read'] = empty($read) ? 0 : $read;
         $this->arrReturn['is_like'] = !empty($is_like) ? 1 : 0;
         $this->arrReturn['history_id'] = !empty($history_id) ? $history_id : 0;
+        $this->arrReturn['num'] = !empty($comment['num']) ? $comment['num'] : 0;
+        $this->arrReturn['commentList'] = !empty($comment['commentList']) ? $comment['commentList'] : [];
+        $this->arrReturn['cid'] = $id;
+        $this->arrReturn['cate'] = 'policy_broadcast';
 
         return view('', $this->arrReturn);
     }

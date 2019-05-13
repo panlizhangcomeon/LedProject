@@ -19,7 +19,7 @@ class HistoryController extends ControllerIndex
     {
         $username = Session::get('username');
         $flag = vae_get_param('flag');
-        $data = Db::name('history')->where(['username' => $username])->order('created_at', 'desc')->paginate(20);
+        $data = Db::name('history')->where(['username' => $username])->order('updated_at', 'desc')->paginate(20);
 
         $this->arrReturn = parent::getReturnArr(6, 3, 1);
         $this->arrReturn['data'] = $data;

@@ -1,4 +1,4 @@
-{layout name="layout2" /}
+{layout name="layout3" /}
 
 <section class="met-shownews animsition">
     <div class="container">
@@ -17,8 +17,11 @@
 							<span>
 								<i class="icon wb-eye margin-right-5" aria-hidden="true"></i>{$read}
 							</span>
+                            <input type="hidden" id="cid" value="{$cid}">
+                            <input type="hidden" id="cate" value="{$cate}">
                             <?php if (\think\Session::has('username')): ?>
                             <div>
+                                <input type="hidden" id="username" value="<?= \think\Session::get('username') ?>">
                                 {eq name="is_like" value="1"}
                                 <span class="glyphicon glyphicon-heart" style="cursor: pointer;" id="like1" onclick="changeLike(0, {$history_id})"></span>
                                 {else/}
@@ -67,6 +70,4 @@ text-overflow: ellipsis; /*超出部分用...代替*/">
 
                             <?php endif; ?>
                         </ul>
-                    </div>
-                </div>
-            </div>
+                        <p></p>
