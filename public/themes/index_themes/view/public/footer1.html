@@ -47,18 +47,21 @@
             <!--登陆信息-->
         <div style="float: left;" class="state-indicator1">
             <?php if (!\think\Session::has('username')){ ?>
-            [<a href="/index/leave_message/index?flag=message"><font color="red">查看留言</font></a>]
-            &nbsp;&nbsp;
-            您未登陆，请先
-            [<a href="/index/login/index?flag=login"><font color="red">登陆</font></a>]
-            [<a href="/index/register/index?flag=register"><font color="red">注册</font></a>]
-            <?php } else { ?>
-            欢迎您 ，&nbsp;<?= \think\Session::get('username') ?>
-            [<a href="/index/user/index?flag=personal"><font color="red">个人中心</font></a>]
-            [<a href="/index/history/index?flag=history"><font color="red">我看过的</font></a>]
-            [<a href="/index/like/index?flag=like"><font color="red">我收藏的</font></a>]<br>
-            [<a href="/index/leave_message/index?flag=message"><font color="red">查看留言</font></a>]
-            [<a href="/index/login/quit?flag=quit"><font color="red">退出登陆</font></a>]
+                <a href="/index/leave_message/index?flag=message" class="btn btn-primary btn-sm">查看留言</a>
+                &nbsp;&nbsp;
+                您未登陆，请先
+                <a href="/index/login/index?flag=login" class="btn btn-info btn-sm">登陆</a>
+                &nbsp;
+                <a href="/index/register/index?flag=register" class="btn btn-info btn-sm">注册</a>
+                &nbsp;
+                <?php } else { ?>
+                欢迎您 ，&nbsp;<?= \think\Session::get('username') ?>
+                &nbsp;&nbsp;
+                <a href="/index/user/index?flag=personal" class="btn btn-default btn-sm" style="margin-top: 5px;">个人中心</a>
+                <a href="/index/history/index?flag=history" class="btn btn-info btn-sm" style="margin-top: 5px;">我看过的</a>
+                <a href="/index/like/index?flag=like" class="btn btn-success btn-sm" style="margin-top: 5px;">我收藏的</a>
+                <a href="/index/leave_message/index?flag=message" class="btn btn-primary btn-sm" style="margin-top: 5px;">查看留言</a>
+                <a href="/index/login/quit?flag=quit" class="btn btn-warning btn-sm" style="margin-top: 5px;">退出登陆</a>
             <?php } ?>
         </div>
         </p>
