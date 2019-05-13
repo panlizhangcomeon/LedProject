@@ -23,6 +23,7 @@
 							<span>
 								<i class="icon wb-eye margin-right-5" aria-hidden="true"></i>{$read}
 							</span>
+                            <?php if (\think\Session::has('username')): ?>
                             <div>
 								{eq name="is_like" value="1"}
                                 <span class="glyphicon glyphicon-heart" style="cursor: pointer;" id="like1" onclick="changeLike(0, {$history_id})"></span>
@@ -32,6 +33,7 @@
                                 <span class="glyphicon glyphicon-heart" id="like" style="cursor: pointer;display: none;" onclick="changeLike(0, {$history_id})"></span>
                                 <span class="glyphicon glyphicon-heart-empty" id="noLike" style="cursor: pointer;display: none;" onclick="changeLike(1, {$history_id})"></span>
 							</div>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="met-editor lazyload clearfix">

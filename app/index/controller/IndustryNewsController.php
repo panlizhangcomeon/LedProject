@@ -58,8 +58,8 @@ class IndustryNewsController extends ControllerIndex
         $this->arrReturn['data_next'] = $pre_next_data['data_next'];
         $this->arrReturn['order_news'] = parent::getOrderNewsList();
         $this->arrReturn['read'] = empty($read) ? 0 : $read;
-        $this->arrReturn['is_like'] = $is_like ? 1 : 0;
-        $this->arrReturn['history_id'] = $history_id;
+        $this->arrReturn['is_like'] = !empty($is_like) ? 1 : 0;
+        $this->arrReturn['history_id'] = !empty($history_id) ? $history_id : 0;
 
         return view('', $this->arrReturn);
     }
