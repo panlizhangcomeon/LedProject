@@ -26,7 +26,7 @@
                     <div >
                         <div class="cm">
                             <div class="cm-header">
-                                <span style="font-weight: bold;">{$data.username}</span>
+                                <span style="font-weight: bold;font-size: 1.2em;">{$data.username}</span>
                                 <span>{$data.comment_time}</span>
                                 <a class="comment-reply" comment_id="{$data.id}" href="javascript:void(0);"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>回复</a>
                             </div>
@@ -48,7 +48,7 @@
                             <div >
                                 <div class="children-cm">
                                     <div  class="cm-header">
-                                        <span style="font-weight: bold;">{$child.username}</span>
+                                        <span style="font-weight: bold;font-size: 1.2em;">{$child.username}</span>
                                         <span>{$child.comment_time}</span>
                                         <a class="comment-reply" replyswitch="off" comment_id="{$child.id}"  href="javascript:void(0);"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>回复</a>
                                     </div>
@@ -67,7 +67,7 @@
                                     <div >
                                         <div class="children-cm">
                                             <div class="cm-header">
-                                                <span style="font-weight: bold;">{$grandson.username}</span>
+                                                <span style="font-weight: bold;font-size: 1.2em;">{$grandson.username}</span>
                                                 <span>{$grandson.comment_time}</span>
                                             </div>
                                             <div class="cm-content">
@@ -126,16 +126,16 @@
                         var newli = "";
                         if(cmdata.parent_id == "0"){
                             //发表的是一级评论时，添加到一级ul列表中
-                            newli = "<li comment_id='"+data.id+"'><div ><div class='cm'><div  class='cm-header'><span style='font-weight: bold;'>"+data.username+"</span><span>"+data.comment_time+"</span><a class='comment-reply' comment_id='"+data.id+"'  href='javascript:void(0);'><span class='glyphicon glyphicon-comment' aria-hidden='true'></span>回复</a></div><div class='cm-content'><p>"+data.content+"</p></div></div></div><ul class='children'></ul></li>";
+                            newli = "<li comment_id='"+data.id+"'><div ><div class='cm'><div  class='cm-header'><span style='font-weight: bold;font-size: 1.2em;'>"+data.username+"</span><span>"+data.comment_time+"</span><a class='comment-reply' comment_id='"+data.id+"'  href='javascript:void(0);'><span class='glyphicon glyphicon-comment' aria-hidden='true'></span>回复</a></div><div class='cm-content'><p>"+data.content+"</p></div></div></div><ul class='children'></ul></li>";
                             $(".comment-ul").prepend(newli);
                         }else{
                             //否则添加到对应的孩子ul列表中
                             if('off'==replyswitch){
                                 //检验出回复关闭锁存在，即三级评论不再提供回复功能
-                                newli = "<li comment_id='"+data.id+"'><div ><div class='children-cm'><div  class='cm-header'><span style='font-weight: bold;'>"+data.username+"</span><span>"+data.comment_time+"</span></div><div class='cm-content'><p>"+data.content+"</p></div><div class='cm-footer'></div></div></div><ul class='children'></ul></li>";
+                                newli = "<li comment_id='"+data.id+"'><div ><div class='children-cm'><div  class='cm-header'><span style='font-weight: bold;font-size: 1.2em;'>"+data.username+"</span><span>"+data.comment_time+"</span></div><div class='cm-content'><p>"+data.content+"</p></div><div class='cm-footer'></div></div></div><ul class='children'></ul></li>";
                             }else{
                                 //二级评论的回复按钮要添加回复关闭锁属性
-                                newli = "<li comment_id='"+data.id+"'><div ><div class='children-cm'><div  class='cm-header'><span style='font-weight: bold;'>"+data.username+"</span><span>"+data.comment_time+"</span><a class='comment-reply' comment_id='"+data.id+"'  href='javascript:void(0);' replyswitch='off' ><span class='glyphicon glyphicon-comment' aria-hidden='true'></span>回复</a></div><div class='cm-content'><p>"+data.content+"</p></div></div></div><ul class='children'></ul></li>";
+                                newli = "<li comment_id='"+data.id+"'><div ><div class='children-cm'><div  class='cm-header'><span style='font-weight: bold;font-size: 1.2em;'>"+data.username+"</span><span>"+data.comment_time+"</span><a class='comment-reply' comment_id='"+data.id+"'  href='javascript:void(0);' replyswitch='off' ><span class='glyphicon glyphicon-comment' aria-hidden='true'></span>回复</a></div><div class='cm-content'><p>"+data.content+"</p></div></div></div><ul class='children'></ul></li>";
                             }
                             $("li[comment_id='"+data.parent_id+"']").children("ul").append(newli);
                         }
