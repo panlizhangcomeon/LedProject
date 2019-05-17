@@ -275,3 +275,26 @@ function my_dir($dir) {
         return $files;
     }
 }
+
+//获得两个用户的相似度
+function getSimilarData($arr)
+{
+    $data = [];
+    if (!empty($arr)) {
+        foreach ($arr as $key => $value) {
+            $data[$key] = sqrt(array_sum($value));
+        }
+    }
+    return $data;
+}
+
+//获得二维数组的差集
+function array_diff_assoc2_deep($array1, $array2) {
+    $arr3 = [];
+    foreach ($array1 as $key => $value) {
+        if (!in_array($value, $array2)) {
+            $arr3[] = $value;
+        }
+    }
+    return $arr3;
+}

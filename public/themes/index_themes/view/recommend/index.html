@@ -1,0 +1,53 @@
+{layout name="layout2" /}
+
+<div class="row" xmlns="http://www.w3.org/1999/html">
+    <div class="col-md-2"></div>
+    <hr class="col-md-6">
+</div>
+
+<section class="met-news animsition">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 met-news-body">
+                <div class="row">
+                    <div class="met-news-list">
+
+                        <div class="row" align="center">
+                            <div class="col-md-4">
+                                <ol class="breadcrumb">
+                                    <li><a href="/index/index/index">首页</a></li>
+                                    <li><a href="#">智能推荐</a></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <p></p>
+
+                        <ul class="met-page-ajax">
+                            {volist name="recommend" id="news"}
+                            <li class="">
+                                <div class="media media-lg">
+                                    <div class="media-body">
+                                        <h4 class="media-heading">
+                                            <a href="/index/{$news.cate}/show?id={$news.cid}&flag=search" title="{$news.title}" target='_blank'>{$news.title}</a>
+                                        </h4>
+                                        <p class="info">
+                                            <span>{$news.publish_date}</span>
+                                            <span class="margin-left-10">LED照明驱动</span>
+                                            <span class="glyphicon glyphicon-heart-empty"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            {/volist}
+                        </ul>
+
+                        <div class="hidden-xs">
+
+                        </div>
+                        <div class="met-page-ajax-body visible-xs-block">
+                            <button type="button" class="btn btn-default btn-block btn-squared ladda-button" id="met-page-btn" data-style="slide-left" data-url="http://www.lulian.cn/news/?lang=cn&class1=2&class2=4&class3=0&mbpagelist=1" data-page="1"><i class="icon wb-chevron-down margin-right-5" aria-hidden="true"></i>更多文章</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>

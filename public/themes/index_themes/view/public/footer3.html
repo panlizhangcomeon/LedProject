@@ -165,9 +165,9 @@
             var divhtml = "";
             if('off'==$(this).attr("replyswitch")){
                 //二级评论回复后三级评论不再提供回复功能,将关闭属性附加到"提交回复"按钮"
-                divhtml = "<div class='div-reply-txt' style='width:98%;padding:3px;' replyid='2'><div><textarea class='txt-reply' replyid='2' style='width: 100%; height: 60px;'></textarea></div><div style='margin-top:5px;text-align:right;'><a class='comment-submit'  parent_id='"+parent_id+"' style='font-size:14px;text-decoration:none;background-color:#63B8FF;' href='javascript:void(0);' replyswitch='off' >提交回复</a></div></div>";
+                divhtml = "<div class='div-reply-txt' style='width:98%;padding:3px;' replyid='2'><div><textarea class='txt-reply' replyid='2' style='width: 100%; height: 60px;'></textarea></div><div style='margin-top:5px;text-align:right;'><a class='comment-submit'  parent_id='"+parent_id+"' style='font-size:14px;text-decoration:none;background-color:#63B8FF;padding:2px 5px;border-radius: 3px;color: white;' href='javascript:void(0);' replyswitch='off' >提交回复</a></div></div>";
             }else{
-                divhtml = "<div class='div-reply-txt' style='width:98%;padding:3px;' replyid='2'><div><textarea class='txt-reply' replyid='2' style='width: 100%; height: 60px;'></textarea></div><div style='margin-top:5px;text-align:right;'><a class='comment-submit'  parent_id='"+parent_id+"' style='font-size:14px;text-decoration:none;background-color:#63B8FF;' href='javascript:void(0);'>提交回复</a></div></div>";
+                divhtml = "<div class='div-reply-txt' style='width:98%;padding:3px;' replyid='2'><div><textarea class='txt-reply' replyid='2' style='width: 100%; height: 60px;'></textarea></div><div style='margin-top:5px;text-align:right;'><a class='comment-submit'  parent_id='"+parent_id+"' style='font-size:14px;text-decoration:none;background-color:#63B8FF;padding:2px 5px;border-radius: 3px;color: white;' href='javascript:void(0);'>提交回复</a></div></div>";
             }
             $(this).parent().parent().append(divhtml);
         }
@@ -275,8 +275,9 @@
                 <a href="/index/user/index?flag=personal" class="btn btn-default btn-sm" style="margin-top: 5px;">个人中心</a>
                 <a href="/index/history/index?flag=history" class="btn btn-info btn-sm" style="margin-top: 5px;">我看过的</a>
                 <a href="/index/like/index?flag=like" class="btn btn-success btn-sm" style="margin-top: 5px;">我收藏的</a>
+                <a href="/index/recommend/index?flag=recommend" class="btn btn-warning btn-sm" style="margin-top: 5px;">智能推荐</a>
                 <a href="/index/leave_message/index?flag=message" class="btn btn-primary btn-sm" style="margin-top: 5px;">查看留言</a>
-                <a href="/index/login/quit?flag=quit" class="btn btn-warning btn-sm" style="margin-top: 5px;">退出登陆</a>
+                <a href="/index/login/quit?flag=quit" class="btn btn-danger btn-sm" style="margin-top: 5px;">退出登陆</a>
             <?php } ?>
         </div>
         </p>

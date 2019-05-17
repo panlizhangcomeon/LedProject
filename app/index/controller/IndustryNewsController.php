@@ -6,6 +6,7 @@
  */
 namespace app\index\controller;
 
+use think\Cache;
 use think\Session;
 use vae\controller\ControllerIndex;
 use think\Db;

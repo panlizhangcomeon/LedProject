@@ -21,6 +21,8 @@ class ControllerIndex extends Controller
 {
     public $arrReturn; //渲染到视图的数组
 
+    public $cateArr = ['industry_news', 'central_information', 'announcement', 'policy_broadcast', 'scientific_trends', 'scientific_achievement', 'research_consulation']; //文章不同栏目
+
     protected function _initialize()
     {
         parent::_initialize();
@@ -195,5 +197,64 @@ class ControllerIndex extends Controller
         $num = Db::name('comment')->where(['cate' => $cate, 'cid' => $cid])->count(); //获取评论总数
         $data = $this->getCommentList($cate, $cid); //获取评论列表
         return ['num' => $num, 'commentList' => $data];
+    }
+
+
+    //获得最近十个登陆的用户
+    public function getRecentUser()
+    {
+        $data = Db::name('user')->order('last_login', 'desc')->field('username')->limit(1, 10)->select();
+        $recent_users = array_column($data, 'username');
+        return $recent_users;
+    }
+
+    //计算当前用户和最近十个用户不同栏目的浏览文章数,根据欧式距离计算用户相似度,得出相似度最近的用户
+    public function getSimilarUser()
+    {
+        $data = [];
+        $cates = $this->cateArr;
+        $users = $this->getRecentUser();
+        if (Session::has('username')) {
+            $username = Session::get('username');
+            foreach ($users as $u) {
+                foreach ($cates as $c) {
+                    $data[$username][$c] = Db::name('history')->where(['cate' => $c, 'username' => $username])->count();
+                    $data[$u][$c] = Db::name('history')->where(['cate' => $c, 'username' => $u])->count();
+                    $similar[$u][] = pow(($data[$username][$c]-$data[$u][$c]), 2);
+                }
+            }
+            $result = getSimilarData($similar);
+            $users = array_search(min($result), $result);
+            return $users;
+        }
+    }
+
+    //组装历史浏览数据
+    public function getPackHistoryData($arr)
+    {
+        foreach ($arr as $value) {
+            $data[] = [
+                'title' => $value['title'],
+                'cate' => $value['cate'],
+                'cid' => $value['cid'],
+                'publish_date' => $value['publish_date']
+            ];
+        }
+        return !empty($data) ? $data : [];
+    }
+
+    //获得推荐内容
+    public function getRecommend()
+    {
+        if (Session::has('username')) {
+            $login_user = Session::get('username');
+            $similar_user = $this->getSimilarUser();
+            $similar_user_data = Db::name('history')->where(['username' => $similar_user])->order('updated_at', 'desc')->limit(10)->select();
+            $login_user_data = Db::name('history')->where(['username' => $login_user])->select();
+            $similar_data = $this->getPackHistoryData($similar_user_data);
+            $login_data = $this->getPackHistoryData($login_user_data);
+            $recommend_data = array_diff_assoc2_deep($similar_data, $login_data);
+            return $recommend_data;
+        }
     }
 }
