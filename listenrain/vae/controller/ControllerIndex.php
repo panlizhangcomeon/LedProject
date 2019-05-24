@@ -81,11 +81,14 @@ class ControllerIndex extends Controller
      */
     public function getOrderNewsList()
     {
+        $data = [];
         $redis = $this->connectRedis();
         $arr = $redis->zRevRange('read', 0, -1, 'WITHSCORES');
         $order = array_keys($arr);
-        for ($i = 0; $i<6; $i++) {
-            $data[] = Db::name('search')->find(['id' => $order[$i]]);
+        if (!empty($order)) {
+            for ($i = 0; $i<6; $i++) {
+                $data[] = Db::name('search')->find(['id' => $order[$i]]);
+            }
         }
         return $data;
     }
